@@ -1,0 +1,32 @@
+button {
+    background-color: #4CAF50; /* grøn baggrund */
+    color: white;              /* hvid tekst */
+    border: none;              /* fjern standardkant */
+    padding: 8px 16px;
+    border-radius: 8px;        /* runde hjørner */
+    cursor: pointer;           /* ændrer musen til hånd */
+}
+
+td {
+    border: solid black;
+    padding: 10px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.tableBackground {
+    background-color: beige;
+    display: inline-block;
+    padding: 2px 5px;
+}
+
+body {
+    background-color: lightblue;
+    text-align: center;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+}
+h1 {
+    font-family: Papyrus;
+}
