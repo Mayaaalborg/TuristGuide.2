@@ -37,7 +37,8 @@ public class TouristController {
     }
 
     @GetMapping("/{name}/tags")
-    public String showTags(Model model) {
+    public String showTags(@PathVariable String name, Model model) {
+        model.addAttribute("name", name);
         return "tags";
     }
 

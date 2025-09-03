@@ -1,15 +1,20 @@
+/* forside */
 * {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 .container {
     display: grid;
-    grid-template-areas: 'item1';
-'item2';
-'item3';
-'item4';
+    grid-template-areas:
+            "item1"
+            "item2"
+            "item3"
+            "item4";
+    gap: 10px;
     place-items: center;
+    padding: 20px;
 }
 
 .container > div {
@@ -52,7 +57,7 @@ footer {
     margin-top: 10px;
 }
 
-p {
+p.pForside {
     background-color: white;
     display: inline-block;
     padding: 2px 5px;
