@@ -2,9 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add attraction</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+<h1> Add new attraction </h1>
+
+<form th:action="@{/attraction/add}" th:object="${attraction}" method="post">
+    <label for="name">Navn:</label>
+    <input type="text" id="name" th:field="*{name}" required>
+    <br><br>
+
+    <label for="description">Beskrivelse:</label>
+    <textarea id="description" th:field="*{description}" required></textarea>
+    <br><br>
+
+    <a href="/attraction/save"><button type="submit">Gem attraktion</button></a>
+</form>
+
+<br>
+<a href="/attraction/all">← Tilbage til oversigten</a>
+<a href="/index.html"><button>Tilbage til forsiden</button></a>
 
 </body>
 </html>

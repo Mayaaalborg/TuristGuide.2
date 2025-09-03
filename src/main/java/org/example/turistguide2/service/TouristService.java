@@ -21,23 +21,29 @@ public class TouristService {
         return repository.getAll();
     }
 
+    public TouristAttraction findAttractionByName(String name){
+        return repository.findAttractionByName(name);
+        /*TouristAttraction attraction = repository.findAttractionByName(name);
+        return attraction;*/
+    }
+
     public TouristAttraction addAttraction(TouristAttraction attraction){
         return repository.addAttraction(attraction);
     }
 
-    public TouristAttraction findAttractionByName(String name){
-        TouristAttraction attraction = repository.findAttractionByName(name);
-        return attraction;
-    }
 
-    public TouristAttraction deleteAttraction (TouristAttraction attraction, boolean delete) {
-        if (delete) {
-            return repository.deleteAttraction(attraction);
+        public TouristAttraction updateAttraction(String name, TouristAttraction updatedAttraction){
+            TouristAttraction existing = repository.findAttractionByName(name);
+            if (existing != null) {
+                return repository.updateAttraction(name , updatedAttraction);
+            }
+            return null;
         }
-        return null;
-    }
-    public TouristAttraction updateAttraction(String name, TouristAttraction updatedAttraction){
-        return repository.updateAttraction(name , updatedAttraction);
-    }
 
+        public TouristAttraction deleteAttraction (TouristAttraction attraction, boolean delete) {
+            if (delete) {
+                return repository.deleteAttraction(attraction);
+            }
+            return null;
+        }
 }

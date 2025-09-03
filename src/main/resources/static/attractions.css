@@ -1,0 +1,37 @@
+button {
+    background-color: #4CAF50; /* grøn baggrund */
+    color: white;              /* hvid tekst */
+    border: none;              /* fjern standardkant */
+    padding: 8px 16px;
+    border-radius: 8px;        /* runde hjørner */
+    cursor: pointer;           /* ændrer musen til hånd */
+}
+
+td {
+    border: solid black;
+    padding: 10px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.tableBackground {
+    background-color: beige;
+    display: inline-block;
+    padding: 2px 5px;
+}
+
+body {
+    background-color: lightblue;
+    background-image: url("https://cdn.dribbble.com/userupload/41863629/file/original-365bc794b2d75e82a2b4f5192b56f6da.gif");
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin: 0;
+
+    padding-top: 60px;
+}
+h1 {
+    font-family: Papyrus;
+}

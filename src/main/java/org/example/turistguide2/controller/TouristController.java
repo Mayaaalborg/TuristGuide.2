@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping("attraction")
 public class TouristController {
-    TouristService service;
+    private final TouristService service;
 
     public TouristController(TouristService service) {
         this.service = service;
@@ -31,14 +31,16 @@ public class TouristController {
 
     @GetMapping("/{name}")
     public String findAttraction(@PathVariable String name, Model model) {
-        service.findAttractionByName(name);
+        TouristAttraction attraction = service.findAttractionByName(name);
         model.addAttribute("name", name);
+        model.addAttribute("attraction", attraction);
         return "findAttractionByName";
     }
 
     @GetMapping("/{name}/tags")
     public String showTags(@PathVariable String name, Model model) {
-        model.addAttribute("name", name);
+        TouristAttraction attraction = service.findAttractionByName(name);
+        model.addAttribute("attraction", attraction);
         return "tags";
     }
 
@@ -49,11 +51,10 @@ public class TouristController {
         return "addAttraction";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/save")
     public String add(@ModelAttribute TouristAttraction attraction) {
         service.addAttraction(attraction);
-        return "redirect:/attractions/all";
-
+        return "redirect:/attraction/all";
     }
 
     /*
@@ -62,10 +63,9 @@ public class TouristController {
         return new ResponseEntity<>(savedAttraction, HttpStatus.CREATED);
     }*/
     @PostMapping("/delete/{name}")
-    public String deleteAttraction(Model model) {
-
-
-        return "delete";
+    public String delete (@ModelAttribute TouristAttraction attraction) {
+        service.deleteAttraction(attraction, true);
+        return "redirect:/attraction/all";
     }
 
     /*

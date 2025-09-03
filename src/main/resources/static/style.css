@@ -12,23 +12,30 @@
             "item2"
             "item3"
             "item4";
-    gap: 10px;
+    gap: 20px;
     place-items: center;
     padding: 20px;
+}
+
+/*Grid-placering*/
+.item1 { grid-area: item1; }
+.item2 { grid-area: item2; }
+.item3 { grid-area: item3; }
+.item4 {
+    /*background-color: white;*/
+    grid-area: item4;
+    padding: 60px 10px 10px 10px;
+    font-size: 16px;
+    background: rgba(232, 230, 224, 0.37);
+    display: inline-block;
+    border-radius: 25px;
+    width: 350px;
+    min-height: 120px;
 }
 
 .container > div {
     padding: 10px;
     font-size: 16px;
-}
-
-.item4 {
-    /*background-color: white;*/
-    background: rgba(232, 230, 224, 0.37);
-    display: inline-block;
-    border-radius: 25px;
-    width: 350px;
-    height: 120px;
 
 }
 
@@ -41,12 +48,15 @@ body {
     background-position: center center;
     height: 100vh;
     margin: 0;
+    padding-top: 60px;
 }
 
+/* Overskrift font */
 h1 {
     font-family: Papyrus;
 }
 
+/* Liste */
 ul.myUL {
     display: inline-block;
     text-align: left;
@@ -57,9 +67,11 @@ footer {
     margin-top: 10px;
 }
 
+/* Paragraf med baggrund */
 p.pForside {
     background-color: white;
     display: inline-block;
     padding: 2px 5px;
     border-radius: 10px;
 }
+

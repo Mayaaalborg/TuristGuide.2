@@ -6,10 +6,12 @@
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
-
 <header>
     <h1> TAG VISES HER </h1>
 </header>
-
+<table>
+    <tr th:text="${attraction.name}">name</tr>
+    <li th:text="${attraction.tag}"></li>
+</table>
 </body>
 </html>
