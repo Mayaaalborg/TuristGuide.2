@@ -7,11 +7,16 @@
 </head>
 <body>
 <header>
-    <h1> TAG VISES HER </h1>
+    <h1 th:text="'Tags for: ' + ${attraction.name}"> Tags for attraktion</h1>
 </header>
-<table>
-    <tr th:text="${attraction.name}">name</tr>
-    <li th:text="${attraction.tag}"></li>
-</table>
+
+<h2>Description</h2>
+<p th:text="${attraction.description}">Attraction description</p>
+
+<h2>Tags</h2>
+<ul>
+    <li th:each="tag : ${attraction.tag}" th:text="${tag}">Tag</li>
+</ul>
+
 </body>
 </html>

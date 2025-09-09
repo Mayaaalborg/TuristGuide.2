@@ -7,19 +7,27 @@
 </head>
 <body>
 <h1> All attractions</h1>
+
 <div class="tableBackground">
   <table>
+    <thead>
     <tr th:if="${attractions.isEmpty()}"> There are no attractions"</tr>
     <tr th:if="${!attractions.isEmpty()}">
       <th>Name</th>
       <th>Description</th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="attraction: ${attractions}">
-      <td th:text="${attraction.name}">
-      <td th:text="${attraction.description}">
+      <td th:text="${attraction.name}">Attraction Name</td>
+      <td th:text="${attraction.description}">Description</td>
       <td>
-        <a th:href="@{{name}/tags(name=${attraction.name})}"><button>Tags</button></a>
+        <a th:href="@{/attraction/{name}/tags(name=${attraction.name})}"><button>Tags</button></a>
+        <a th:href="@{/attraction/{name}/edit(name=${attraction.name})}"> <button>Edit</button></a>
+        <a th:href="@{/attraction/{name}/delete(name=${attraction.name})}"><button>Delete</button></a>
       </td>
+    </tr>
+    </tbody>
   </table>
 </div>
 <br>

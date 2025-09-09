@@ -32,10 +32,10 @@ public class TouristService {
     }
 
 
-        public TouristAttraction updateAttraction(String name, TouristAttraction updatedAttraction){
-            TouristAttraction existing = repository.findAttractionByName(name);
+        public TouristAttraction updateAttraction(TouristAttraction updatedAttraction){
+            TouristAttraction existing = repository.findAttractionByName(updatedAttraction.getName());
             if (existing != null) {
-                return repository.updateAttraction(name , updatedAttraction);
+                return repository.updateAttraction(updatedAttraction);
             }
             return null;
         }

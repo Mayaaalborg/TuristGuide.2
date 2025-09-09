@@ -10,7 +10,7 @@
 
 <h1> Add new attraction </h1>
 
-<form th:action="@{/attraction/add}" th:object="${attraction}" method="post">
+<form th:action="@{/attraction/save}" th:object="${attraction}" method="post">
     <label for="name">Navn:</label>
     <input type="text" id="name" th:field="*{name}" required>
     <br><br>
@@ -19,7 +19,25 @@
     <textarea id="description" th:field="*{description}" required></textarea>
     <br><br>
 
-    <a href="/attraction/save"><button type="submit">Gem attraktion</button></a>
+    <label>Vælg tags:</label><br>
+    <div th:each="t : ${Tags}">
+        <input type="checkbox"
+               th:value="${t}"
+               th:field="*{tag}"
+               th:id="${t}"/>
+        <label th:for="${t}" th:text="${t}"></label><br>
+    </div>
+
+
+    <label for="city">City</label>
+        <select id="city" th:field="*{city}">
+            <option th:each="c : ${cities}"
+                    th:value="${c}"
+                    th:text="${c}">
+            </option>
+        </select>
+    <br><br>
+    <button type="submit" >Gem attraktion</button>
 </form>
 
 <br>

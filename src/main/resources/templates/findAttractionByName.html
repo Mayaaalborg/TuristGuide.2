@@ -5,16 +5,26 @@
     <title>Find attraction by name</title>
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body >
+<body>
 <h1>Attraction</h1>
-<p th:if="${attraction.name != null}" th:text="${attraction.name}">Name </p>
-<p th:if="${attraction.name != null}" th:text="${attraction.description}">Description </p>
-<p th:if="${attraction.name == null }"> This is not an attraction </p>
+<div th:if="${attraction != null}">
+    <p th:text="${attraction.name}">Name</p>
+    <p th:text="${attraction.description}">Description</p>
+    <br>
 
-
-<table>
-
-
-</table>
+    <p th:text="${attraction.city}">City</p>
+    <br>
+    <div>
+        <b>Tags:</b>
+        <br>
+        <ul th:if="${attraction.tag != null and !#lists.isEmpty(attraction.tag)}">
+            <li th:each="t : ${attraction.tag}" th:text="${t}">TAG</li>
+        </ul>
+        <p th:if="${attraction.tag == null or #lists.isEmpty(attraction.tag)}">No tag</p>
+        <a href="/index.html"><button>Tilbage til forsiden</button></a>
+    </div>
+</div>
+<div th:if="${attraction == null}">
+    <p>Attraction not found.</p>
+</div>
 </body>
-</html>
