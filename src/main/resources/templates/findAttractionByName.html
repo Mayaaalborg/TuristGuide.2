@@ -9,12 +9,18 @@
 <h1>Attraction</h1>
 <p th:if="${attraction.name != null}" th:text="${attraction.name}">Name </p>
 <p th:if="${attraction.name != null}" th:text="${attraction.description}">Description </p>
-<p th:if="${attraction.name == null }"> This is not an attraction </p>
+<br>
 
+<p th:text="${attraction.city}">City</p>
+<br>
+<div>
+    <b>Tags:</b>
+    <br>
+    <p th:if="${attraction.tag != null and !attraction.tag.isEmpty()}">
+        <li th:each="tag : ${attraction.tag}" th:text="${tag}">TAG</li>
+    </p>
+    <p th:if="${attraction.tag == null}">No tags</p>
 
-<table>
-
-
-</table>
+</div>
 </body>
 </html>
