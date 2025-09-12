@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Attraction</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h1>Edit Attraction</h1>
+
+<form th:action="@{/attraction/update/{name}}" th:object="${attraction}" method="post">
+    <label for="name">Navn:</label>
+    <input readonly type="text" id="name" th:field="*{name}" required>
+    <br><br>
+
+    <label for="description">Beskrivelse:</label>
+    <textarea id="description" th:field="*{description}" required></textarea>
+    <br><br>
+
+    <label>Vælg tags:</label><br>
+    <div th:each="t : ${Tags}">
+        <input type="checkbox"
+               th:value="${t}"
+               th:field="*{tag}"
+               th:id="${t}"/>
+        <label th:for="${t}" th:text="${t}"></label><br>
+    </div>
+
+
+    <label for="city">City</label>
+    <select id="city" th:field="*{city}">
+        <option th:each="c : ${cities}"
+                th:value="${c}"
+                th:text="${c}">
+        </option>
+    </select>
+    <br><br>
+    <button type="submit" >Gem attraktion</button>
+</form>
+</body>
+</html>
