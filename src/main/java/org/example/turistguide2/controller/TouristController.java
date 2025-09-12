@@ -59,7 +59,7 @@ public class TouristController {
     @PostMapping("/{name}/delete")
     public String delete(@ModelAttribute TouristAttraction attraction) {
         service.deleteAttraction(attraction, true);
-        return "redirect:attraction/all";
+        return "redirect:/attraction/all";
     }
 
     @GetMapping("/{name}/edit")

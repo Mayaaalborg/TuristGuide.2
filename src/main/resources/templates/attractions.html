@@ -24,7 +24,10 @@
       <td>
         <a th:href="@{/attraction/{name}/tags(name=${attraction.name})}"><button>Tags</button></a>
         <a th:href="@{/attraction/{name}/edit(name=${attraction.name})}"> <button>Edit</button></a>
-        <a th:href="@{/attraction/{name}/delete(name=${attraction.name})}"><button>Delete</button></a>
+        <form th:action="@{/attraction/{name}/delete(name=${attraction.name})}" method="post" style="display:inline;"
+              onsubmit="return confirm('Er du sikker på, at du vil slette denne attraktion?');">
+          <button type="submit">Delete</button>
+        </form>
       </td>
     </tr>
     </tbody>

@@ -2,17 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add attraction</title>
-    <link rel="stylesheet" th:href="@{/attractions.css}">
+    <title>Edit Attraction</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-
 <body>
+<h1>Edit Attraction</h1>
 
-<h1> Add new attraction </h1>
-
-<form th:action="@{/attraction/save}" th:object="${attraction}" method="post">
+<form th:action="@{/attraction/update/{name}}" th:object="${attraction}" method="post">
     <label for="name">Navn:</label>
-    <input type="text" id="name" th:field="*{name}" required>
+    <input readonly type="text" id="name" th:field="*{name}" required>
     <br><br>
 
     <label for="description">Beskrivelse:</label>
@@ -30,19 +28,14 @@
 
 
     <label for="city">City</label>
-        <select id="city" th:field="*{city}">
-            <option th:each="c : ${cities}"
-                    th:value="${c}"
-                    th:text="${c}">
-            </option>
-        </select>
+    <select id="city" th:field="*{city}">
+        <option th:each="c : ${cities}"
+                th:value="${c}"
+                th:text="${c}">
+        </option>
+    </select>
     <br><br>
     <button type="submit" >Gem attraktion</button>
 </form>
-
-<br>
-<a href="/attraction/all">← Tilbage til oversigten</a>
-<a href="/index.html"><button>Tilbage til forsiden</button></a>
-
 </body>
 </html>

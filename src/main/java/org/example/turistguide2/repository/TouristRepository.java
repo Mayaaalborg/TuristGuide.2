@@ -21,7 +21,7 @@ public class TouristRepository {
     private void populateAttractions() {
         attractions.add(new TouristAttraction("Tivoli", "Rutjebaner og såen", EnumSet.of(Tags.Fun, Tags.Educational), Cities.Copenhagen));
         attractions.add(new TouristAttraction("Bibliotek", "Man kan blive rundtosset", EnumSet.of(Tags.Library, Tags.Educational, Tags.School, Tags.Free), Cities.Copenhagen));
-        attractions.add(new TouristAttraction("FCKstadion", "Nordens største", EnumSet.of(Tags.Stadion, Tags.Educational, Tags.Fun), Cities.Copenhagen));
+        attractions.add(new TouristAttraction("FCKstadion", "Parken, Nordens største", EnumSet.of(Tags.Stadion, Tags.Educational, Tags.Fun), Cities.Copenhagen));
         attractions.add(new TouristAttraction("EK", "tidligere kendt som KEA", EnumSet.of(Tags.School, Tags.Educational, Tags.Free), Cities.Copenhagen));
     }
 
