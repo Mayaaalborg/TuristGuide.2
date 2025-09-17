@@ -23,8 +23,7 @@ public class TouristService {
 
     public TouristAttraction findAttractionByName(String name){
         return repository.findAttractionByName(name);
-        /*TouristAttraction attraction = repository.findAttractionByName(name);
-        return attraction;*/
+
     }
 
     public TouristAttraction addAttraction(TouristAttraction attraction){
