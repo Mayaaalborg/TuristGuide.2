@@ -30,7 +30,6 @@ public class TouristService {
         return repository.addAttraction(attraction);
     }
 
-
         public TouristAttraction updateAttraction(TouristAttraction updatedAttraction){
             TouristAttraction existing = repository.findAttractionByName(updatedAttraction.getName());
             if (existing != null) {

@@ -56,12 +56,6 @@ public class TouristController {
         return "redirect:/attraction/all";
     }
 
-    @PostMapping("/{name}/delete")
-    public String delete(@ModelAttribute TouristAttraction attraction) {
-        service.deleteAttraction(attraction, true);
-        return "redirect:/attraction/all";
-    }
-
     @GetMapping("/{name}/edit")
     public String editAttractions(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
@@ -76,6 +70,12 @@ public class TouristController {
     public String updateAttraction(@ModelAttribute TouristAttraction form) {
         service.updateAttraction(form);
         return "redirect:/attraction/" + form.getName();
+    }
+
+    @PostMapping("/{name}/delete")
+    public String delete(@ModelAttribute TouristAttraction attraction) {
+        service.deleteAttraction(attraction, true);
+        return "redirect:/attraction/all";
     }
 }
 
