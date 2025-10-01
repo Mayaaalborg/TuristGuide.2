@@ -29,7 +29,7 @@
     <div>
         <b>Tags:</b>
         <br>
-        <ul th:if="${attraction.tag != null and !#lists.isEmpty(attraction.tag)}">
+        <ul class="fjernerPrikker" th:if="${attraction.tag != null and !#lists.isEmpty(attraction.tag)}">
             <li th:each="t : ${attraction.tag}" th:text="${t}">TAG</li>
         </ul>
         <p th:if="${attraction.tag == null or #lists.isEmpty(attraction.tag)}">No tag</p>
