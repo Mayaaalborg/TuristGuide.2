@@ -7,14 +7,18 @@ public class TouristAttraction {
     private int id;
     private String name;
     private String description;
+    private int citiesID;
     private EnumSet<Tags> tag;
     private Cities city;
 
-    public TouristAttraction(String name, String description, EnumSet<Tags> tag, Cities city) {
+
+
+
+    public TouristAttraction(int id, String name, String description, int citiesID) {
+       this.id = id;
         this.name = name;
         this.description = description;
-        this.tag = tag;
-        this.city = city;
+        this.citiesID = citiesID;
     }
 
     public TouristAttraction() {
@@ -43,12 +47,20 @@ public class TouristAttraction {
         this.tag = tag;
     }
 
-    public Cities getCity() {
-        return city;
+    public int getId() {
+        return id;
     }
 
-    public void setCity(Cities city) {
-        this.city = city;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCitiesID() {
+        return citiesID;
+    }
+
+    public void setCitiesID(int citiesID) {
+        this.citiesID = citiesID;
     }
 }
 
