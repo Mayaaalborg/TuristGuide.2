@@ -71,7 +71,6 @@ public class TouristController {
         model.addAttribute("Tags", Tags.values());
         model.addAttribute("cities", Cities.values());
         return "editForm";
-
     }
 
     @PostMapping("/update/{name}")
