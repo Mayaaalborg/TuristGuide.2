@@ -3,6 +3,7 @@ package org.example.turistguide2.repository;
 import org.example.turistguide2.model.Cities;
 import org.example.turistguide2.model.Tags;
 import org.example.turistguide2.model.TouristAttraction;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,25 +12,25 @@ import java.util.List;
 
 @Repository
 public class TouristRepository {
+
     private final List<TouristAttraction> attractions = new ArrayList<>();
 
     public TouristRepository() {
-        populateAttractions();
     }
 
-    private void populateAttractions() {
-        attractions.add(new TouristAttraction("Tivoli", "Rutjebaner og såen", EnumSet.of(Tags.Fun, Tags.Educational), Cities.Copenhagen));
-        attractions.add(new TouristAttraction("Bibliotek", "Man kan blive rundtosset", EnumSet.of(Tags.Library, Tags.Educational, Tags.School, Tags.Free), Cities.Copenhagen));
-        attractions.add(new TouristAttraction("FCKstadion", "Parken, Nordens største", EnumSet.of(Tags.Stadion, Tags.Educational, Tags.Fun), Cities.Copenhagen));
-        attractions.add(new TouristAttraction("EK", "tidligere kendt som KEA", EnumSet.of(Tags.School, Tags.Educational, Tags.Free), Cities.Copenhagen));
-    }
+//    private void populateAttractions() {
+//        attractions.add(new TouristAttraction("Tivoli", "Rutjebaner og såen", EnumSet.of(Tags.Fun, Tags.Educational), Cities.Copenhagen));
+//        attractions.add(new TouristAttraction("Bibliotek", "Man kan blive rundtosset", EnumSet.of(Tags.Library, Tags.Educational, Tags.School, Tags.Free), Cities.Copenhagen));
+//        attractions.add(new TouristAttraction("FCKstadion", "Parken, Nordens største", EnumSet.of(Tags.Stadion, Tags.Educational, Tags.Fun), Cities.Copenhagen));
+//        attractions.add(new TouristAttraction("EK", "tidligere kendt som KEA", EnumSet.of(Tags.School, Tags.Educational, Tags.Free), Cities.Copenhagen));
+//    }
 
     public List<TouristAttraction> getAll() {
         return attractions;
     }
 
     public TouristAttraction addAttraction(TouristAttraction attraction) {
-        TouristAttraction attraction1 = new TouristAttraction(attraction.getName(), attraction.getDescription(), attraction.getTag(), attraction.getCity());
+        TouristAttraction attraction1 = new TouristAttraction(attraction.getId(), attraction.getName(), attraction.getDescription(), attraction.getCitiesID());
         attractions.add(attraction1);
         return attraction;
     }
@@ -59,7 +60,7 @@ public class TouristRepository {
                 t.setName(updatedAttraction.getName());
                 t.setDescription(updatedAttraction.getDescription());
                 t.setTag(updatedAttraction.getTag());
-                t.setCity(updatedAttraction.getCity());
+                t.setCitiesID(updatedAttraction.getCitiesID());
 
                 return t;
             }

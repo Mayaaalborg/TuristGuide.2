@@ -9,8 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+//Controller klasse
 @Controller
+//Request mapping (URL som vores mappinger tilgåes igennem)
 @RequestMapping("attraction")
 public class TouristController {
     private final TouristService service;
@@ -19,6 +20,7 @@ public class TouristController {
         this.service = service;
     }
 
+    //Diregere til attractions html, og henter kode som bruges til at hente attractions i et forloop
     @GetMapping("/all")
     public String getAll(Model model) {
         List<TouristAttraction> attractions = service.getAll();
@@ -26,6 +28,7 @@ public class TouristController {
         return "attractions";
     }
 
+    //Henter attraction ved navn
     @GetMapping("/{name}")
     public String findAttraction(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
@@ -41,8 +44,10 @@ public class TouristController {
         return "tags";
     }
 
+    //Tilføjer ny attraction
     @GetMapping("/add")
     public String addAttractionsForm(Model model) {
+        //Laver nyt attraction objekt, og oversætter variabler til HTML sprog
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
         model.addAttribute("Tags", Tags.values());
@@ -50,14 +55,17 @@ public class TouristController {
         return "addAttraction";
     }
 
+    //Sender attributer tilbage til koden, og gemmer dem som object
     @PostMapping("/save")
     public String add(@ModelAttribute TouristAttraction attraction) {
         service.addAttraction(attraction);
         return "redirect:/attraction/all";
     }
 
+    //Redigere en attraction ved navn
     @GetMapping("/{name}/edit")
     public String editAttractions(@PathVariable String name, Model model) {
+        //Laver nyt attraction objekt, og oversætter variabler til HTML sprog
         TouristAttraction attraction = service.findAttractionByName(name);
         model.addAttribute("attraction", attraction);
         model.addAttribute("Tags", Tags.values());
