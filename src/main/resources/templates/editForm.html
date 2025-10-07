@@ -21,7 +21,7 @@
     <div th:each="t : ${Tags}">
         <input type="checkbox"
                th:value="${t}"
-               th:field="*{tag}"
+               th:field="*{tags}"
                th:id="${t}"/>
         <label th:for="${t}" th:text="${t}"></label><br>
     </div>

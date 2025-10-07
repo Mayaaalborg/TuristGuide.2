@@ -4,67 +4,66 @@ import org.example.turistguide2.model.Cities;
 import org.example.turistguide2.model.Tags;
 import org.example.turistguide2.model.TouristAttraction;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
 public class TouristRepository {
 
-    private final List<TouristAttraction> attractions = new ArrayList<>();
+    private final JdbcTemplate jdbcTemplate;
 
-    public TouristRepository() {
+    public TouristRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
-//    private void populateAttractions() {
-//        attractions.add(new TouristAttraction("Tivoli", "Rutjebaner og såen", EnumSet.of(Tags.Fun, Tags.Educational), Cities.Copenhagen));
-//        attractions.add(new TouristAttraction("Bibliotek", "Man kan blive rundtosset", EnumSet.of(Tags.Library, Tags.Educational, Tags.School, Tags.Free), Cities.Copenhagen));
-//        attractions.add(new TouristAttraction("FCKstadion", "Parken, Nordens største", EnumSet.of(Tags.Stadion, Tags.Educational, Tags.Fun), Cities.Copenhagen));
-//        attractions.add(new TouristAttraction("EK", "tidligere kendt som KEA", EnumSet.of(Tags.School, Tags.Educational, Tags.Free), Cities.Copenhagen));
-//    }
-
     public List<TouristAttraction> getAll() {
+        String sql = "SELECT * FROM attractions";
+        List<TouristAttraction> attractions = jdbcTemplate.query(sql, new TouristRowMapper());
+
+        for (TouristAttraction t : attractions) {
+            t.setTags(findTagsByAttractionId(t.getId()));
+        }
         return attractions;
     }
 
-    public TouristAttraction addAttraction(TouristAttraction attraction) {
-        TouristAttraction attraction1 = new TouristAttraction(attraction.getId(), attraction.getName(), attraction.getDescription(), attraction.getCitiesID());
-        attractions.add(attraction1);
-        return attraction;
+    public List<Tags> findTagsByAttractionId(int attractionId) {
+        String sql = "SELECT t.ID, t.name FROM tags t JOIN attractiontags a ON a.tagID = t.ID WHERE a.attractionID = ?";
+        return jdbcTemplate.query(sql, new TagRowMapper(), attractionId);
     }
 
-    public TouristAttraction deleteAttraction(TouristAttraction attraction) {
-        for (int i = 0; i < attractions.size(); i++) {
-            TouristAttraction t = attractions.get(i);
-            if (attraction.getName().equals(t.getName())) {
-                return attractions.remove(i);
-            }
-        }
-        return null;
+    public List<Cities> findCityByCitiesId(int attractionId) {
+        String sql = "SELECT c.ID, c.name FROM cities c JOIN attractions a ON c.ID = a.citiesID WHERE a.attractionID = ?";
+        return jdbcTemplate.query(sql, new CityRowMapper(), attractionId);
+    }
+
+    public void addAttraction(TouristAttraction attraction) {
+        String sql = "INSERT INTO attractions (name, description, citiesID) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, attraction.getName(), attraction.getDescription(), attraction.getCitiesID());
+    }
+
+    public void deleteAttraction(String name) {
+        String sql = "DELETE FROM attractions WHERE name = ?";
+        jdbcTemplate.update(sql, name);
     }
 
     public TouristAttraction findAttractionByName(String name) {
-        for (TouristAttraction attraction : attractions) {
-            if (attraction.getName().equalsIgnoreCase(name)) {
-                return attraction;
-            }
-        }
-        return null;
+        String sql = "SELECT * FROM attractions WHERE name = ?";
+        TouristAttraction attraction = jdbcTemplate.queryForObject(sql, new TouristRowMapper(), name);
+        attraction.setTags(findTagsByAttractionId(attraction.getId()));
+        return attraction;
     }
-
-    public TouristAttraction updateAttraction(TouristAttraction updatedAttraction) {
-        for (TouristAttraction t : attractions) {
-            if (t.getName().equalsIgnoreCase(updatedAttraction.getName())) {
-                t.setName(updatedAttraction.getName());
-                t.setDescription(updatedAttraction.getDescription());
-                t.setTag(updatedAttraction.getTag());
-                t.setCitiesID(updatedAttraction.getCitiesID());
-
-                return t;
-            }
-        }
-        return null;
+    
+    public void updateAttraction(TouristAttraction updatedAttraction) {
+        String sql = "UPDATE attractions SET name = ?, description = ?, citiesID = ? WHERE id = ?";
+        jdbcTemplate.update(sql,
+                updatedAttraction.getName(),
+                updatedAttraction.getDescription(),
+                updatedAttraction.getCitiesID(),
+                updatedAttraction.getId());
     }
 }

@@ -50,10 +50,11 @@ public class TouristController {
         //Laver nyt attraction objekt, og oversætter variabler til HTML sprog
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
-        model.addAttribute("Tags", Tags.values());
+        model.addAttribute("tags", Tags.values());
         model.addAttribute("cities", Cities.values());
         return "addAttraction";
     }
+
 
     //Sender attributer tilbage til koden, og gemmer dem som object
     @PostMapping("/save")
@@ -71,7 +72,6 @@ public class TouristController {
         model.addAttribute("Tags", Tags.values());
         model.addAttribute("cities", Cities.values());
         return "editForm";
-
     }
 
     @PostMapping("/update/{name}")
@@ -81,8 +81,8 @@ public class TouristController {
     }
 
     @PostMapping("/{name}/delete")
-    public String delete(@ModelAttribute TouristAttraction attraction) {
-        service.deleteAttraction(attraction, true);
+    public String delete(@PathVariable String name) {
+        service.deleteAttraction(name);
         return "redirect:/attraction/all";
     }
 }

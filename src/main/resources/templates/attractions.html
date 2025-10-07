@@ -11,7 +11,9 @@
 <div class="tableBackground">
   <table>
     <thead>
-    <tr th:if="${attractions.isEmpty()}"> There are no attractions</tr>
+    <tr th:if="${attractions.isEmpty()}">
+      <td colspand="3">There are no attractions</td>
+    </tr>
     <tr th:if="${!attractions.isEmpty()}">
       <th>Name</th>
       <th>Description</th>
@@ -36,6 +38,6 @@
   </table>
 </div>
 <br>
-<a href="/index.html"><button>Tilbage til forsiden</button></a>
+<a href="/"><button>Tilbage til forsiden</button></a>
 </body>
 </html>

@@ -19,7 +19,7 @@
     <textarea id="description" th:field="*{description}" required></textarea>
     <br><br>
 
-    <label>Vælg tags:</label><br>
+   <!-- <label>Vælg tags:</label><br>
     <div th:each="t : ${Tags}">
         <input type="checkbox"
                th:value="${t}"
@@ -38,11 +38,12 @@
         </select>
     <br><br>
     <button type="submit" >Gem attraktion</button>
+-->
 </form>
 
 <br>
 <a href="/attraction/all">← Tilbage til oversigten</a>
-<a href="/index.html"><button>Tilbage til forsiden</button></a>
+<a href="/"><button>Tilbage til forsiden</button></a>
 
 </body>
 </html>
