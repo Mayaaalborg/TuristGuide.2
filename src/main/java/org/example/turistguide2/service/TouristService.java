@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class TouristService {
+
     private final TouristRepository repository;
 
     public TouristService(TouristRepository repository) {
@@ -21,27 +22,19 @@ public class TouristService {
         return repository.getAll();
     }
 
-    public TouristAttraction findAttractionByName(String name){
+    public TouristAttraction findAttractionByName(String name) {
         return repository.findAttractionByName(name);
-
     }
 
-    public TouristAttraction addAttraction(TouristAttraction attraction){
-        return repository.addAttraction(attraction);
+    public void addAttraction(TouristAttraction attraction) {
+        repository.addAttraction(attraction);
     }
 
-        public TouristAttraction updateAttraction(TouristAttraction updatedAttraction){
-            TouristAttraction existing = repository.findAttractionByName(updatedAttraction.getName());
-            if (existing != null) {
-                return repository.updateAttraction(updatedAttraction);
-            }
-            return null;
-        }
+    public void updateAttraction(TouristAttraction attraction) {
+        repository.updateAttraction(attraction);
+    }
 
-        public TouristAttraction deleteAttraction (TouristAttraction attraction, boolean delete) {
-            if (delete) {
-                return repository.deleteAttraction(attraction);
-            }
-            return null;
-        }
+    public void deleteAttraction(String name) {
+        repository.deleteAttraction(name);
+    }
 }

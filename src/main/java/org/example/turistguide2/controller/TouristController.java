@@ -80,8 +80,8 @@ public class TouristController {
     }
 
     @PostMapping("/{name}/delete")
-    public String delete(@ModelAttribute TouristAttraction attraction) {
-        service.deleteAttraction(attraction, true);
+    public String delete(@PathVariable String name) {
+        service.deleteAttraction(name);
         return "redirect:/attraction/all";
     }
 }

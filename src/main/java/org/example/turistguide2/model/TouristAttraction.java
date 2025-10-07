@@ -1,6 +1,7 @@
 package org.example.turistguide2.model;
 
 import java.util.EnumSet;
+import java.util.List;
 
 //Model klasse, bruges til at oprette TouristAttraktions objekter.
 public class TouristAttraction {
@@ -8,8 +9,7 @@ public class TouristAttraction {
     private String name;
     private String description;
     private int citiesID;
-    private EnumSet<Tags> tag;
-    private Cities city;
+    private List<Tags> tags;
 
 
 
@@ -40,13 +40,6 @@ public class TouristAttraction {
         this.description = description;
     }
 
-    public EnumSet<Tags> getTag() {
-        return tag;
-    }
-    public void setTag(EnumSet<Tags> tag) {
-        this.tag = tag;
-    }
-
     public int getId() {
         return id;
     }
@@ -61,6 +54,14 @@ public class TouristAttraction {
 
     public void setCitiesID(int citiesID) {
         this.citiesID = citiesID;
+    }
+
+    public List<Tags> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tags> tags) {
+        this.tags = tags;
     }
 }
 
