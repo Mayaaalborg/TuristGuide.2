@@ -50,7 +50,7 @@ public class TouristController {
         //Laver nyt attraction objekt, og oversætter variabler til HTML sprog
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
-        model.addAttribute("Tags", Tags.values());
+        model.addAttribute("tags", Tags.values());
         model.addAttribute("cities", Cities.values());
         return "addAttraction";
     }

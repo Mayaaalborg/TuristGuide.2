@@ -29,7 +29,6 @@ jobs:
           PROD_DATABASE_URL: ${{secrets.PROD_DATABASE_URL}}
           PROD_USERNAME: ${{secrets.PROD_USERNAME}}
           PROD_PASSWORD: ${{secrets.PROD_PASSWORD}}
-        
         run: mvn clean install
 
       - name: Upload artifact for deployment job

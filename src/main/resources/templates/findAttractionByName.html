@@ -29,11 +29,11 @@
     <div>
         <b>Tags:</b>
         <br>
-        <ul class="fjernerPrikker" th:if="${attraction.tag != null and !#lists.isEmpty(attraction.tag)}">
-            <li th:each="t : ${attraction.tag}" th:text="${t}">TAG</li>
+        <ul class="fjernerPrikker" th:if="${attraction.tags != null and !#lists.isEmpty(attraction.tags)}">
+            <li th:each="t : ${attraction.tags}" th:text="${t.name()}">TAG</li>
         </ul>
-        <p th:if="${attraction.tag == null or #lists.isEmpty(attraction.tag)}">No tag</p>
-        <a href="/templates/index.html"><button>Tilbage til forsiden</button></a>
+        <p th:if="${attraction.tags == null or #lists.isEmpty(attraction.tags)}">No tag</p>
+        <a href="/"><button>Tilbage til forsiden</button></a>
     </div>
 </div>
 <div th:if="${attraction == null}">

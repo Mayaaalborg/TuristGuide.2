@@ -32,8 +32,13 @@ public class TouristRepository {
     }
 
     public List<Tags> findTagsByAttractionId(int attractionId) {
-        String sql = "SELECT t.name FROM tags t JOIN attractiontags at ON at.tagID = t.ID WHERE at.attractionID = ?";
+        String sql = "SELECT t.ID, t.name FROM tags t JOIN attractiontags a ON a.tagID = t.ID WHERE a.attractionID = ?";
         return jdbcTemplate.query(sql, new TagRowMapper(), attractionId);
+    }
+
+    public List<Cities> findCityByCitiesId(int attractionId) {
+        String sql = "SELECT c.ID, c.name FROM cities c JOIN attractions a ON c.ID = a.citiesID WHERE a.attractionID = ?";
+        return jdbcTemplate.query(sql, new CityRowMapper(), attractionId);
     }
 
     public void addAttraction(TouristAttraction attraction) {
@@ -48,9 +53,11 @@ public class TouristRepository {
 
     public TouristAttraction findAttractionByName(String name) {
         String sql = "SELECT * FROM attractions WHERE name = ?";
-        return jdbcTemplate.queryForObject(sql, new TouristRowMapper(), name);
+        TouristAttraction attraction = jdbcTemplate.queryForObject(sql, new TouristRowMapper(), name);
+        attraction.setTags(findTagsByAttractionId(attraction.getId()));
+        return attraction;
     }
-
+    
     public void updateAttraction(TouristAttraction updatedAttraction) {
         String sql = "UPDATE attractions SET name = ?, description = ?, citiesID = ? WHERE id = ?";
         jdbcTemplate.update(sql,
@@ -59,5 +66,4 @@ public class TouristRepository {
                 updatedAttraction.getCitiesID(),
                 updatedAttraction.getId());
     }
-
 }
