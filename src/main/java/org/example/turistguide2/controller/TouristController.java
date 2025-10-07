@@ -54,6 +54,7 @@ public class TouristController {
         model.addAttribute("cities", Cities.values());
         return "addAttraction";
     }
+    
 
     //Sender attributer tilbage til koden, og gemmer dem som object
     @PostMapping("/save")
