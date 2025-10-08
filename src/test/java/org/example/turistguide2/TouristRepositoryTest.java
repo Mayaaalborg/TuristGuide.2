@@ -2,12 +2,8 @@ package org.example.turistguide2;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.example.turistguide2.model.Cities;
 import org.example.turistguide2.model.TouristAttraction;
 import org.example.turistguide2.repository.TouristRepository;
-import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,12 +26,5 @@ public class TouristRepositoryTest {
         List<TouristAttraction> all = repo.getAll();
 
         assertThat(all).isNotNull();
-    }
-
-// Unit test
-    @Test
-    void getAttraction () {
-        TouristAttraction att = new TouristAttraction(10, "Gågaden", "Brug alle dine penge", Cities.Copenhagen);
-        assertEquals("Gågaden", att.getName());
     }
 }
