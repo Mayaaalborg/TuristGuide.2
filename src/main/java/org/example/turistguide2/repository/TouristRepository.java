@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository // Gør klassen til en Spring Repository-komponent, så den kan bruges med dependency injection
 public class TouristRepository {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate; // Bruges til at udføre SQL-forespørgsler mod databasen
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -21,29 +21,33 @@ public class TouristRepository {
         String sql = "SELECT * FROM attractions";
         List<TouristAttraction> attractions = jdbcTemplate.query(sql, new TouristRowMapper());
 
+        // For hver attraction hentes de relaterede tags og city-objekt
         for (TouristAttraction t : attractions) {
-            t.setTags(findTagsByAttractionId(t.getId()));
-            t.setCity(findCityByCitiesId(t.getCity().getId()));
+            t.setTags(findTagsByAttractionId(t.getId())); // Finder alle tags, som hører til attraction
+            t.setCity(findCityByCitiesId(t.getCity().getId())); // Finder city ud fra cityID
         }
-        return attractions;
+        return attractions; // Returnerer listen med færdige attraction-objekter
     }
 
     public List<Tags> findTagsByAttractionId(int attractionId) {
+        // Finder alle tags knyttet til en attraction via join-tabel
         String sql = "SELECT t.ID, t.name FROM tags t JOIN attractiontags a ON a.tagID = t.ID WHERE a.attractionID = ?";
-        return jdbcTemplate.query(sql, new TagRowMapper(), attractionId);
+        return jdbcTemplate.query(sql, new TagRowMapper(), attractionId); // Returnerer en liste af Tags-objekter
     }
 
     public Cities findCityByCitiesId(int citiesId) {
+        // Finder én by baseret på ID
         String sql = "SELECT ID, name FROM cities WHERE ID = ?";
         try {
-            return jdbcTemplate.queryForObject(sql, new CityRowMapper(), citiesId);
+            return jdbcTemplate.queryForObject(sql, new CityRowMapper(), citiesId); // Returnerer City-objekt
         } catch (org.springframework.dao.EmptyResultDataAccessException e) {
-            System.out.println("No city found for ID: " + citiesId);
+            System.out.println("No city found for ID: " + citiesId); // Hvis ingen resultater findes
             return null;
         }
     }
 
     public void addAttraction(TouristAttraction attraction, List<Tags> tags) {
+        // Indsætter ny attraction i databasen
         String sql = "INSERT INTO attractions (name, description, citiesID) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, attraction.getName(), attraction.getDescription(), attraction.getCity().getId());
 
@@ -59,6 +63,7 @@ public class TouristRepository {
         }
     }
     public void deleteAttraction(String name) {
+        // Finder attractionID ud fra navn
         String findIdSql = "SELECT id FROM attractions WHERE name = ?";
         Integer attractionId = jdbcTemplate.queryForObject(findIdSql, Integer.class, name);
 
@@ -66,13 +71,14 @@ public class TouristRepository {
         String deleteTagsSql = "DELETE FROM attractionTags WHERE attractionID = ?";
         jdbcTemplate.update(deleteTagsSql, attractionId);
 
+        // Sletter selve attraction fra attractions-tabellen
         String sql = "DELETE FROM attractions WHERE name = ?";
         jdbcTemplate.update(sql, name);
     }
 
     public TouristAttraction findAttractionByName(String name) {
+        // Finder en attraction ud fra navn
         String sql = "SELECT * FROM attractions WHERE name = ?";
-
         List<TouristAttraction> results = jdbcTemplate.query(sql, new TouristRowMapper(), name);
 
         // Hvis der ikke findes nogen attraktion med det navn, returneres null (ingen fejl kastes)
@@ -91,13 +97,14 @@ public class TouristRepository {
     }
 
     public void updateAttraction(TouristAttraction updatedAttraction, List<Tags> tags) {
+        // Finder en attraction ud fra navn
         String sql = "UPDATE attractions SET name = ?, description = ?, citiesID = ? WHERE id = ?";
         jdbcTemplate.update(sql,
                 updatedAttraction.getName(),
                 updatedAttraction.getDescription(),
                 updatedAttraction.getCity().getId(),
                 updatedAttraction.getId());
-
+// Sletter alle eksisterende tag-koblinger for at erstatte dem
         String deleteSql = "DELETE FROM attractionTags WHERE attractionID = ?";
         jdbcTemplate.update(deleteSql, updatedAttraction.getId());
 
