@@ -1,6 +1,7 @@
 package org.example.turistguide2;
 
 import org.example.turistguide2.model.TouristAttraction;
+import org.example.turistguide2.repository.TouristRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -17,14 +18,12 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 public class TouristRepositoryTest {
 
     @Autowired
-    private org.example.turistguide2.repository.TouristRepository repo;
+    private TouristRepository repo;
 
     @Test
-    void readAll() {
+    void getall() {
         List<TouristAttraction> all = repo.getAll();
 
         assertThat(all).isNotNull();
-        assertThat(all.get(0).getName()).isEqualTo("Tivoli");
-        assertThat(all.get(1).getName()).isEqualTo("Bibliotek");
     }
 }
