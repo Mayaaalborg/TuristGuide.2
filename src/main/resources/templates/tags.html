@@ -12,7 +12,7 @@
 
 <h2>Description</h2>
 <p th:text="${attraction.description}">Attraction description</p>
-
+<p th:text="${attraction.city}">City</p>
 <h2>Tags</h2>
 <ul>
     <li th:each="tag : ${attraction.tags}" th:text="${tag}">Tag</li>

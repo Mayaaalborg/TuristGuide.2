@@ -8,7 +8,11 @@
 <body>
 <h1>Edit Attraction</h1>
 
-<form th:action="@{/attraction/update/{name}}" th:object="${attraction}" method="post">
+<form th:action="@{/attraction/update/{name}(name=${attraction.name})}" th:object="${attraction}" method="post">
+
+    <!-- Skjult felt der sender attraction-ID med i formen, så det rigtige objekt kan opdateres -->
+    <input type="hidden" th:field="*{id}"/>
+
     <label for="name">Navn:</label>
     <input readonly type="text" id="name" th:field="*{name}" required>
     <br><br>
@@ -17,6 +21,14 @@
     <textarea id="description" th:field="*{description}" required></textarea>
     <br><br>
 
+    <h3>Vælg tags:</h3>
+    <div th:each="tag : ${tags}">
+        <input type="checkbox" name="tagIds" th:value="${tag.id}">
+        <span th:text="${tag.name()}"></span><br>
+    </div>
+
+
+    <!--
     <label>Vælg tags:</label><br>
     <div th:each="t : ${Tags}">
         <input type="checkbox"
@@ -25,7 +37,7 @@
                th:id="${t}"/>
         <label th:for="${t}" th:text="${t}"></label><br>
     </div>
-
+-->
 
     <label for="city">City</label>
     <select id="city" th:field="*{city}">

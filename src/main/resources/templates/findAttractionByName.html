@@ -24,7 +24,8 @@
     <p th:text="${attraction.description}">Description</p>
     <br>
 
-    <p th:text="${attraction.city}">City</p>
+    <h2>City</h2>
+    <p th:text="${attraction.city != null ? attraction.city.name : 'No city found'}"></p>
     <br>
     <div>
         <b>Tags:</b>
