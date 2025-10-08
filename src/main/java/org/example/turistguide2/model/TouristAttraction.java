@@ -1,6 +1,5 @@
 package org.example.turistguide2.model;
 
-import java.util.EnumSet;
 import java.util.List;
 
 //Model klasse, bruges til at oprette TouristAttraktions objekter.
