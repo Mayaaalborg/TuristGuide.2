@@ -26,8 +26,8 @@ CREATE TABLE attractionTags (
 
 -- init data
 
-INSERT INTO cities(ID, name) VALUES (1, 'København');
-INSERT INTO cities(ID, name) VALUES (2, 'Sjælland');
+INSERT INTO cities(ID, name) VALUES (1, 'Copenhagen');
+INSERT INTO cities(ID, name) VALUES (2, 'Zealand');
 INSERT INTO cities(ID, name) VALUES (3, 'Roskilde');
 INSERT INTO cities(ID, name) VALUES (4, 'Jutland');
 INSERT INTO cities(ID, name) VALUES (5, 'Fyn');
