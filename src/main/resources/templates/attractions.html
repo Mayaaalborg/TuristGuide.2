@@ -12,7 +12,7 @@
   <table>
     <thead>
     <tr th:if="${attractions.isEmpty()}">
-      <td colspand="3">There are no attractions</td>
+      <td colspan="3">There are no attractions</td>
     </tr>
     <tr th:if="${!attractions.isEmpty()}">
       <th>Name</th>
@@ -30,7 +30,6 @@
         <form th:action="@{/attraction/{name}/delete(name=${attraction.name})}" method="post" style="display:inline;"
               onsubmit="return confirm('Er du sikker på, at du vil slette denne attraktion?');">
           <button type="submit">Delete</button>
-
         </form>
       </td>
     </tr>

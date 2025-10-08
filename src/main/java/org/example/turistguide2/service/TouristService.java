@@ -2,6 +2,7 @@
 package org.example.turistguide2.service;
 
 
+import org.example.turistguide2.model.Tags;
 import org.springframework.stereotype.Service;
 import org.example.turistguide2.repository.TouristRepository;
 import org.example.turistguide2.model.TouristAttraction;
@@ -15,7 +16,10 @@ public class TouristService {
 
     public TouristService(TouristRepository repository) {
         this.repository = repository;
+    }
 
+    public void addAttraction(TouristAttraction attraction, List<Tags> tags) {
+        repository.addAttraction(attraction, tags);
     }
 
     public List<TouristAttraction> getAll() {
@@ -26,12 +30,9 @@ public class TouristService {
         return repository.findAttractionByName(name);
     }
 
-    public void addAttraction(TouristAttraction attraction) {
-        repository.addAttraction(attraction);
-    }
 
-    public void updateAttraction(TouristAttraction attraction) {
-        repository.updateAttraction(attraction);
+    public void updateAttraction(TouristAttraction attraction, List<Tags> tags) {
+        repository.updateAttraction(attraction, tags);
     }
 
     public void deleteAttraction(String name) {

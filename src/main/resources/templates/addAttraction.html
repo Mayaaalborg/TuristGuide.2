@@ -1,49 +1,24 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add attraction</title>
-    <link rel="stylesheet" th:href="@{/attractions.css}">
-</head>
+<form th:action="@{/attraction/save}" method="post" th:object="${attraction}">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required><br>
 
-<body>
+    <label>Description:</label>
+    <input type="text" th:field="*{description}" required><br>
 
-<h1> Add new attraction </h1>
+    <label>City:</label>
+    <select th:field="*{city}" required>
+        <option th:each="city : ${cities}"
+                th:value="${city}"
+                th:text="${city.name()}"></option>
+    </select>
 
-<form th:action="@{/attraction/save}" th:object="${attraction}" method="post">
-    <label for="name">Navn:</label>
-    <input type="text" id="name" th:field="*{name}" required>
-    <br><br>
-
-    <label for="description">Beskrivelse:</label>
-    <textarea id="description" th:field="*{description}" required></textarea>
-    <br><br>
-
-   <!-- <label>Vælg tags:</label><br>
-    <div th:each="t : ${Tags}">
-        <input type="checkbox"
-               th:value="${t}"
-               th:field="*{tag}"
-               th:id="${t}"/>
-        <label th:for="${t}" th:text="${t}"></label><br>
+    <h3>Vælg tags:</h3>
+    <div th:each="tag : ${tags}">
+        <input type="checkbox" name="tagIds" th:value="${tag.id}">
+        <span th:text="${tag.name()}"></span><br>
     </div>
 
+    <body> <p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red;"></p> </body>
 
-    <label for="city">City</label>
-        <select id="city" th:field="*{city}">
-            <option th:each="c : ${cities}"
-                    th:value="${c}"
-                    th:text="${c}">
-            </option>
-        </select>
-    <br><br>
-    <button type="submit" >Gem attraktion</button>
--->
+    <button type="submit">Save</button>
 </form>
-
-<br>
-<a href="/attraction/all">← Tilbage til oversigten</a>
-<a href="/"><button>Tilbage til forsiden</button></a>
-
-</body>
-</html>

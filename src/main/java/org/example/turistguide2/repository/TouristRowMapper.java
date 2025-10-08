@@ -1,5 +1,6 @@
 package org.example.turistguide2.repository;
 
+import org.example.turistguide2.model.Cities;
 import org.example.turistguide2.model.TouristAttraction;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -14,8 +15,7 @@ public class TouristRowMapper implements RowMapper<TouristAttraction> {
         t.setId(rs.getInt("ID"));
         t.setName(rs.getString("name"));
         t.setDescription(rs.getString("description"));
-        t.setCitiesID(rs.getInt("citiesID"));
+        t.setCity(Cities.fromId(rs.getInt("citiesID")));
         return t;
     }
-
 }
