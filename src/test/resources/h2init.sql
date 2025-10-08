@@ -16,12 +16,12 @@ CREATE TABLE tags (
     );
 
 CREATE TABLE attractionTags (
-    attraction_ID INT,
-    tags_ID INT,
-    PRIMARY KEY (attraction_ID, tags_ID),
-    FOREIGN KEY (attraction_ID) REFERENCES attraction(ID),
-    FOREIGN KEY (tags_ID) REFERENCES tags(ID)
-    );
+attraction_ID INT,
+tags_ID INT,
+PRIMARY KEY (attraction_ID, tags_ID),
+FOREIGN KEY (attraction_ID) REFERENCES attractions(ID),
+FOREIGN KEY (tags_ID) REFERENCES tags(ID)
+);
 
 
 -- init data
