@@ -1,8 +1,9 @@
 package org.example.turistguide2;
 
+import org.junit.jupiter.api.Test;
+
 import org.example.turistguide2.model.TouristAttraction;
 import org.example.turistguide2.repository.TouristRepository;
-import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class TouristService {
 
+    //Vi opretter reference til repository som taler med databasen.
     private final TouristRepository repository;
 
     public TouristService(TouristRepository repository) {
@@ -22,9 +23,11 @@ public class TouristService {
         repository.addAttraction(attraction, tags);
     }
 
+
     public List<TouristAttraction> getAll() {
         return repository.getAll();
     }
+
 
     public TouristAttraction findAttractionByName(String name) {
         return repository.findAttractionByName(name);
@@ -34,6 +37,7 @@ public class TouristService {
     public void updateAttraction(TouristAttraction attraction, List<Tags> tags) {
         repository.updateAttraction(attraction, tags);
     }
+
 
     public void deleteAttraction(String name) {
         repository.deleteAttraction(name);
